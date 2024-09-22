@@ -121,7 +121,7 @@ const Page = () => {
                 <select
                   id="category"
                   name="category"
-                  aria-Label="Category"
+                  aria-label="Category"
                   value={formData.category}
                   onChange={handleChange}
                   className="block w-full px-4 py-3 mt-1 rounded-md shadow-sm border  "

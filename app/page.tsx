@@ -60,7 +60,7 @@ export default function Home() {
               </h2>
               <p className="my-6 ">
                 {" "}
-                At Colour Clouds Digital, we&apos;re passionate about crafting digital solutions that resonate. Whether you're looking to build cutting-edge applications or engage your audience with compelling digital content, our team is ready to bring your vision to life. Explore how we transform ideas into impactful digital realities.{" "}
+                At Colour Clouds Digital, we&apos;re passionate about crafting digital solutions that resonate. Whether you&apos;re looking to build cutting-edge applications or engage your audience with compelling digital content, our team is ready to bring your vision to life. Explore how we transform ideas into impactful digital realities.{" "}
               </p>
             </div>
           </div>
@@ -88,7 +88,7 @@ export default function Home() {
                 size="lg"
                 className="text-black dark:text-white"
               >
-                Let's Talk
+                Let&apos;s Talk
               </Button>
             </Link>
           </div>
