@@ -125,7 +125,7 @@ export default function Home() {
             </details>
             <details className="w-full border rounded-lg">
               <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
-              Do you offer custom solutions?
+              Do you offer custom solutions? 
               </summary>
               <p className="px-4 py-6 pt-0 ml-4 -mt-4 ">
               Yes! Every project is tailored to meet your unique needs and business goals. Let’s create something that stands out.{" "}
