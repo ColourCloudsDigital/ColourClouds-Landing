@@ -78,7 +78,7 @@ export default function Home() {
             </h2>
             <p className="px-4 text-lg lg:px-0">
               {" "}
-              Let&amp;s Build Your Digital Future Together{" "}
+              Let's Build Your Digital Future Together{" "}
             </p>
           </div>
           <div className="flex flex-row items-center self-center justify-center flex-shrink-0 lg:justify-end">
@@ -120,7 +120,7 @@ export default function Home() {
               How can I get started with your services?
               </summary>
               <p className="px-4 py-6 pt-0 ml-4 -mt-4 ">
-              Simply click on our Get Started Today button, and we&amp;ll walk you through the process of bringing your project to life.{" "}
+              Simply click on our Get Started Today button, and we'll walk you through the process of bringing your project to life.{" "}
               </p>
             </details>
             <details className="w-full border rounded-lg">
