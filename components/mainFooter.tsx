@@ -42,7 +42,7 @@ const MainFooter = () => {
               
               <Link
                 
-                href="https://github.com/shazam-africa"
+                href="https://github.com/ColourCloudsDigital"
                 target='_blank'
                 title="GitHub"
                 className="flex items-center justify-center w-10 h-10 rounded-full bg-black text-gray-50"
