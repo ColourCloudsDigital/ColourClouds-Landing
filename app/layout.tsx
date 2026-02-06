@@ -4,7 +4,6 @@ import "./globals.css";
 import MainNav from "@/components/mainNav";
 import MainFooter from "@/components/mainFooter";
 import { Toaster } from "sonner";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +16,12 @@ export const metadata: Metadata = {
     "App development",
     "Content creation",
   ],
+  verification: {
+    google: "wuKkVFD1dhs31EjQNk81yBbw-temshhMPPc8JGAUC94",
+  },
+  other: {
+    "google-adsense-account": "ca-pub-9924264215171914",
+  },
 };
 
 export default function RootLayout({
@@ -26,18 +31,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <meta
-        name="google-site-verification"
-        content="wuKkVFD1dhs31EjQNk81yBbw-temshhMPPc8JGAUC94"
-      />
-      <meta name="google-adsense-account" content="ca-pub-9924264215171914" />
-      <Head>
+      <head>
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9924264215171914"
           crossOrigin="anonymous"
         ></script>
-      </Head>
+      </head>
       <body className={inter.className}>
         <div className="">
           <MainNav />

@@ -51,6 +51,10 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Colour Clouds Digital brand colors
+        'cc-green': '#01A750',
+        'cc-blue': '#0072FF',
+        'cc-red': '#FF0000',
       },
       borderRadius: {
         lg: "var(--radius)",
