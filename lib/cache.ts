@@ -112,11 +112,11 @@ export const getCachedBlogPostBySlug = (slug: string) => {
  * 
  * @example
  * // After updating a blog post in Google Sheets
- * await revalidateBlogPosts();
+ * revalidateBlogPosts();
  */
 export async function revalidateBlogPosts(): Promise<void> {
   'use server';
-  revalidateTag(CACHE_TAGS.BLOG_POSTS);
+  revalidateTag(CACHE_TAGS.BLOG_POSTS, 'default');
 }
 
 /**
@@ -135,8 +135,8 @@ export async function revalidateBlogPosts(): Promise<void> {
  */
 export async function revalidateBlogPost(slug: string): Promise<void> {
   'use server';
-  revalidateTag(`blog-post-${slug}`);
-  revalidateTag(CACHE_TAGS.BLOG_POST);
+  revalidateTag(`blog-post-${slug}`, 'default');
+  revalidateTag(CACHE_TAGS.BLOG_POST, 'default');
 }
 
 /**
@@ -153,10 +153,10 @@ export async function revalidateBlogPost(slug: string): Promise<void> {
  */
 export async function revalidateAllBlogCaches(): Promise<void> {
   'use server';
-  revalidateTag(CACHE_TAGS.BLOG_POSTS);
-  revalidateTag(CACHE_TAGS.BLOG_POST);
-  revalidateTag(CACHE_TAGS.CATEGORIES);
-  revalidateTag(CACHE_TAGS.TAGS);
+  revalidateTag(CACHE_TAGS.BLOG_POSTS, 'default');
+  revalidateTag(CACHE_TAGS.BLOG_POST, 'default');
+  revalidateTag(CACHE_TAGS.CATEGORIES, 'default');
+  revalidateTag(CACHE_TAGS.TAGS, 'default');
 }
 
 /**

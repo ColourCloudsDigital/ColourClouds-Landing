@@ -20,13 +20,13 @@ import DOMPurify from 'dompurify';
  * DOMPurify requires a DOM window object. In Node.js environment (like tests),
  * we create one using JSDOM. In browser environment, we use the global window.
  */
-let purify: DOMPurify.DOMPurifyI;
+let purify: any;
 
 if (typeof window === 'undefined') {
   // Node.js environment - use JSDOM
   const { JSDOM } = require('jsdom');
   const jsdomWindow = new JSDOM('').window;
-  purify = DOMPurify(jsdomWindow as unknown as Window);
+  purify = DOMPurify(jsdomWindow as any);
 } else {
   // Browser environment - use global window
   purify = DOMPurify(window);

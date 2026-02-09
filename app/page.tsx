@@ -4,6 +4,34 @@ import Image from "next/image";
 import Link from "next/link";
 
 
+import type { Metadata } from "next";
+
+// ============================================================================
+// Metadata
+// ============================================================================
+
+export const metadata: Metadata = {
+  title: 'Home | Colour Clouds Digital',
+  description: 'Shaping Digital Experiences, One App at a Time. Innovative app development and digital content creation services from Colour Clouds Digital.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Colour Clouds Digital - Think, Build, Explore',
+    description: 'Shaping Digital Experiences, One App at a Time. Innovative app development and digital content creation services.',
+    type: 'website',
+    url: '/',
+    images: [
+      {
+        url: 'https://i.imghippo.com/files/tXnYf1727040648.png',
+        width: 500,
+        height: 500,
+        alt: 'Colour Clouds Digital Hero Image',
+      },
+    ],
+  },
+};
+
 export default function Home() {
   return (
     <main className="">

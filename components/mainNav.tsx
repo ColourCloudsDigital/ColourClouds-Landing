@@ -7,7 +7,11 @@ import CcLogo from '../app/cc-logo.svg';
 export default function MainNav() {
   const [state, setState] = React.useState(false);
   const menus = [
-    { title: "Feedback", path: "/contact" },
+    { title: "Home", path: "/" },
+    { title: "Services", path: "/services" },
+    { title: "About", path: "/about" },
+    { title: "Blog", path: "/blog" },
+    { title: "Contact", path: "/contact" },
   ];
 
   return (
