@@ -407,7 +407,7 @@ export default function ServicesPage() {
                 <Button 
                   size="lg" 
                   variant="secondary"
-                  className="bg-white text-[#01A750] hover:bg-white/90"
+                  className="bg-white text-[#01A750] hover:border-white/10"
                 >
                   Get Started Today
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -417,7 +417,7 @@ export default function ServicesPage() {
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="border-white bg-transparent text-white hover:bg-white/10"
+                  className="border-white bg-transparent text-white hover:bg-white"
                 >
                   View Our Portfolio
                 </Button>

@@ -15,6 +15,7 @@ import React from 'react'
 import Link from 'next/link'
 import { NewsletterForm } from './newsletter-form'
 import { Mail, Github, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react'
+import CcLogo from '../app/cc-logo.svg';
 
 const MainFooter = () => {
   const footerLinks = [
@@ -70,9 +71,7 @@ const MainFooter = () => {
                 href="/"
                 className="inline-block mb-6 group"
               >
-                <span className="text-2xl font-bold bg-gradient-to-r from-cc-green to-cc-blue bg-clip-text text-transparent group-hover:scale-105 transition-transform inline-block">
-                  Colour Clouds
-                </span>
+                    <CcLogo className="w-[120px] h-auto" />
               </Link>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 Creating innovative digital solutions through app development and content creation. 
