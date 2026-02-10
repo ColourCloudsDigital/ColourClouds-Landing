@@ -126,10 +126,10 @@ export function BlogCard({ post }: BlogCardProps) {
         {/* Read More Link */}
         <Link
           href={`/blog/${post.slug}`}
-          className="inline-flex items-center gap-2 text-cc-blue font-semibold hover:text-cc-green transition-colors duration-200 group/link"
+          className="inline-flex items-center gap-2 text-cc-blue font-semibold hover:text-cc-green transition-colors duration-200 group"
         >
           <span>Read Article</span>
-          <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" />
+          <ArrowRight className="w-4 h-4 arrow-animate" />
         </Link>
       </div>
     </article>

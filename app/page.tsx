@@ -67,7 +67,7 @@ export default function Home() {
                     className="bg-cc-green hover:bg-cc-green-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group"
                   >
                     Start Your Digital Journey
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-5 w-5 arrow-animate" />
                   </Button>
                 </Link>
                 <Link href="/about">
@@ -186,7 +186,7 @@ export default function Home() {
                     className="bg-cc-green hover:bg-cc-green-600 text-white group"
                   >
                     Explore Our Services
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 h-5 w-5 arrow-animate" />
                   </Button>
                 </Link>
               </div>
@@ -224,7 +224,7 @@ export default function Home() {
                   className="bg-white text-cc-green hover:bg-gray-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group"
                 >
                   Let's Talk
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-5 w-5 arrow-animate" />
                 </Button>
               </Link>
             </div>

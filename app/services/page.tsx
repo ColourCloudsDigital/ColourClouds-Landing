@@ -180,9 +180,9 @@ export default function ServicesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
-                <Button size="lg" className="bg-[#01A750] hover:bg-[#01A750]/90 text-white">
+                <Button size="lg" className="bg-[#01A750] hover:bg-[#01A750]/90 text-white group">
                   Start Your Project
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-4 w-4 arrow-animate" />
                 </Button>
               </Link>
               <Link href="/blog">
@@ -243,9 +243,9 @@ export default function ServicesPage() {
           {/* CTA */}
           <div className="text-center mt-12">
             <Link href="/contact">
-              <Button size="lg" className="bg-[#01A750] hover:bg-[#01A750]/90 text-white">
+              <Button size="lg" className="bg-[#01A750] hover:bg-[#01A750]/90 text-white group">
                 Discuss Your App Project
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4 arrow-animate" />
               </Button>
             </Link>
           </div>
@@ -300,9 +300,9 @@ export default function ServicesPage() {
           {/* CTA */}
           <div className="text-center mt-12">
             <Link href="/contact">
-              <Button size="lg" className="bg-[#0072FF] hover:bg-[#0072FF]/90 text-white">
+              <Button size="lg" className="bg-[#0072FF] hover:bg-[#0072FF]/90 text-white group">
                 Start Creating Content
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-4 w-4 arrow-animate" />
               </Button>
             </Link>
           </div>

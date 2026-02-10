@@ -116,4 +116,13 @@
   .transition-smooth {
     @apply transition-all duration-300 ease-in-out;
   }
+  
+  /* Arrow animation for buttons */
+  .arrow-animate {
+    @apply transition-transform duration-200 ease-out;
+  }
+  
+  .group:hover .arrow-animate {
+    @apply translate-x-1;
+  }
 }

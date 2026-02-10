@@ -18,6 +18,7 @@ import { validateNewsletterForm } from '@/lib/validators';
 import { sanitizeEmail, sanitizeInput } from '@/lib/sanitize';
 import { formRateLimiter } from '@/lib/rate-limit';
 import { ValidationError, GoogleSheetsError, RateLimitError, Subscriber } from '@/lib/types';
+import { sendNewsletterNotification, sendNewsletterWelcome } from '@/lib/nodemailer';
 
 /**
  * POST handler for newsletter subscription
@@ -166,6 +167,24 @@ export async function POST(request: NextRequest) {
 
       throw error;
     }
+
+    // Send email notifications (non-blocking - don't fail if emails fail)
+    // Send notification to admin
+    sendNewsletterNotification({
+      email: sanitizedEmail,
+      name: sanitizedName,
+      source: sanitizedSource,
+    }).catch(error => {
+      console.error('Failed to send admin notification email:', error);
+    });
+
+    // Send welcome email to subscriber
+    sendNewsletterWelcome({
+      email: sanitizedEmail,
+      name: sanitizedName,
+    }).catch(error => {
+      console.error('Failed to send welcome email:', error);
+    });
 
     // Return success response
     return NextResponse.json(

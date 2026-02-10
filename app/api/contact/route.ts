@@ -20,6 +20,7 @@ import { sanitizeEmail, sanitizeInput } from '@/lib/sanitize';
 import { rateLimit } from '@/lib/rate-limit';
 import { ValidationError, GoogleSheetsError, RateLimitError, ContactSubmission } from '@/lib/types';
 import { randomUUID } from 'crypto';
+import { sendContactFormNotification, sendContactConfirmation } from '@/lib/nodemailer';
 
 /**
  * Rate limiter for contact form submissions
@@ -237,6 +238,25 @@ export async function POST(request: NextRequest) {
 
       throw error;
     }
+
+    // Send email notifications (non-blocking - don't fail if emails fail)
+    // Send notification to admin
+    sendContactFormNotification({
+      name: sanitizedName,
+      email: sanitizedEmail,
+      subject: sanitizedSubject,
+      message: sanitizedMessage,
+    }).catch(error => {
+      console.error('Failed to send admin notification email:', error);
+    });
+
+    // Send confirmation to user
+    sendContactConfirmation({
+      name: sanitizedName,
+      email: sanitizedEmail,
+    }).catch(error => {
+      console.error('Failed to send confirmation email:', error);
+    });
 
     // Return success response
     return NextResponse.json(

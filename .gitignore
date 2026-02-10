@@ -26,9 +26,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+/config/colour-clouds-ng-server-dafd4cf6ebff.json
+.env
 .env*.local
-.env*.example
-.env*.sample
 
 # vercel
 .vercel
