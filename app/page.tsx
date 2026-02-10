@@ -60,6 +60,7 @@ export default function Home() {
             height={500}
             width={500}
             className="rounded-sm"
+            priority
           />
           </div>
         </div>
@@ -76,6 +77,7 @@ export default function Home() {
                 height={500}
                 width={500}
                 className="rounded-sm"
+                loading="lazy"
               />
             </div>
             <div className="flex flex-col justify-center flex-1 px-6 lg:flex-2">

@@ -95,7 +95,12 @@ function filterBlogPosts(
  * - GET /api/blog?search=portfolio
  * - GET /api/blog?category=Development&tag=nextjs&search=modern
  * 
- * Requirements: 4.9, 4.10
+ * Response:
+ * Success (200): { success: true, data: { posts: BlogPost[], total: number, filters: {...} } }
+ * Rate Limit (429): { success: false, error: "Too many requests. Please try again later." }
+ * Server Error (500/503): { success: false, error: "Error message" }
+ * 
+ * Requirements: 4.9, 4.10, 2.5, 9.3, 9.4
  */
 export async function GET(request: NextRequest) {
   try {
@@ -112,7 +117,48 @@ export async function GET(request: NextRequest) {
     logger.info('Query parameters', { category, tag, search });
 
     // Fetch cached blog posts
-    const posts = await getCachedBlogPosts();
+    // Requirements: 2.5 - Handle Google Sheets API errors gracefully
+    let posts;
+    try {
+      posts = await getCachedBlogPosts();
+    } catch (error) {
+      // Log the specific error for debugging
+      // Requirements: 2.5 - Log errors for debugging
+      if (error instanceof GoogleSheetsError) {
+        logger.error('Google Sheets API error while fetching blog posts', error, {
+          code: error.code,
+          statusCode: error.statusCode,
+        });
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Service temporarily unavailable. Please try again later.',
+          },
+          { status: 503 }
+        );
+      }
+
+      if (error instanceof RateLimitError) {
+        logger.error('Rate limit exceeded while fetching blog posts', error, {
+          retryAfter: error.retryAfter,
+        });
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Service is currently busy. Please try again in a moment.',
+          },
+          {
+            status: 429,
+            headers: {
+              'Retry-After': error.retryAfter.toString(),
+            },
+          }
+        );
+      }
+
+      // Re-throw unexpected errors to be caught by outer catch block
+      throw error;
+    }
 
     // Filter posts based on query parameters
     const filteredPosts = filterBlogPosts(posts, category, tag, search);
@@ -120,6 +166,7 @@ export async function GET(request: NextRequest) {
     logger.info(`Returning ${filteredPosts.length} blog posts (filtered from ${posts.length} total)`);
 
     // Return filtered posts
+    // Requirements: 9.3 - Return appropriate error responses
     return NextResponse.json({
       success: true,
       data: {
@@ -134,14 +181,20 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error: any) {
-    logger.error('Failed to fetch blog posts', error);
+    // Log unexpected errors for debugging
+    // Requirements: 2.5, 9.3 - Log errors and return user-friendly messages
+    logger.error('Unexpected error in blog API', error, {
+      errorName: error?.name,
+      errorMessage: error?.message,
+    });
 
     // Handle rate limit errors
+    // Requirements: 2.4 - Handle rate limit errors gracefully
     if (error instanceof RateLimitError) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Too many requests. Please try again later.',
+          error: 'Service is currently busy. Please try again in a moment.',
         },
         {
           status: 429,
@@ -153,6 +206,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Handle Google Sheets errors
+    // Requirements: 2.5 - Return user-friendly error message for API failures
     if (error instanceof GoogleSheetsError) {
       return NextResponse.json(
         {
@@ -164,6 +218,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Handle generic errors
+    // Requirements: 9.4 - Return user-friendly error messages (not exposing internal details)
     return NextResponse.json(
       {
         success: false,
@@ -172,4 +227,19 @@ export async function GET(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+/**
+ * OPTIONS handler for CORS preflight requests
+ */
+export async function OPTIONS(request: NextRequest) {
+  return NextResponse.json(
+    {},
+    {
+      status: 200,
+      headers: {
+        'Allow': 'GET, OPTIONS',
+      },
+    }
+  );
 }

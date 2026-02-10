@@ -343,70 +343,70 @@ This implementation plan breaks down the multipage portfolio conversion into dis
     - _Requirements: 10.2, 10.3_
 
 - [ ] 17. Implement SEO and metadata
-  - [-] 17.1 Add metadata to all pages
+  - [x] 17.1 Add metadata to all pages
     - Add metadata exports to home, services, about, blog, contact pages
     - Include title, description, Open Graph tags, canonical URLs
     - Ensure proper heading hierarchy (h1, h2, h3) on all pages
     - _Requirements: 6.1, 6.2, 6.3, 6.7_
   
-  - [~] 17.2 Create sitemap
+  - [x] 17.2 Create sitemap
     - Create app/sitemap.ts to generate dynamic sitemap
     - Include all static pages and dynamic blog post pages
     - _Requirements: 6.5_
   
-  - [~] 17.3 Optimize images
+  - [x] 17.3 Optimize images
     - Update all image usage to use Next.js Image component
     - Configure image domains in next.config.js
     - Implement lazy loading for below-the-fold images
     - _Requirements: 6.4, 12.2, 12.3_
   
-  - [~] 17.4 Write property test for page metadata completeness
+  - [x] 17.4 Write property test for page metadata completeness
     - **Property 18: Page Metadata Completeness**
     - **Validates: Requirements 6.1**
   
-  - [~] 17.5 Write property test for heading hierarchy
+  - [x] 17.5 Write property test for heading hierarchy
     - **Property 19: Heading Hierarchy Compliance**
     - **Validates: Requirements 6.2**
   
-  - [~] 17.6 Write property test for Open Graph tags
+  - [x] 17.6 Write property test for Open Graph tags
     - **Property 20: Open Graph Tags Presence**
     - **Validates: Requirements 6.3**
   
-  - [~] 17.7 Write property test for canonical URLs
+  - [x] 17.7 Write property test for canonical URLs
     - **Property 22: Canonical URL Presence**
     - **Validates: Requirements 6.7**
   
-  - [~] 17.8 Write unit test for sitemap generation
+  - [x] 17.8 Write unit test for sitemap generation
     - Test sitemap includes all expected pages (example test)
     - _Requirements: 6.5_
 
 - [ ] 18. Implement error handling and boundaries
-  - [~] 18.1 Create error boundary component
+  - [x] 18.1 Create error boundary component
     - Create components/error-boundary.tsx with React error boundary
     - Add fallback UI for caught errors
     - _Requirements: 9.5_
   
-  - [~] 18.2 Create custom error pages
+  - [x] 18.2 Create custom error pages
     - Create app/not-found.tsx for 404 errors
     - Create app/error.tsx for 500 errors
     - Style consistently with brand design
     - _Requirements: 9.6_
   
-  - [~] 18.3 Add error handling to all API routes
+  - [x] 18.3 Add error handling to all API routes
     - Ensure all API routes return appropriate error responses
     - Log errors for debugging
     - Return user-friendly error messages
     - _Requirements: 2.5, 9.3, 9.4_
   
-  - [~] 18.4 Write property test for data fetching error display
+  - [x] 18.4 Write property test for data fetching error display
     - **Property 25: Data Fetching Error Display**
     - **Validates: Requirements 9.3**
   
-  - [~] 18.5 Write property test for form submission error notification
+  - [x] 18.5 Write property test for form submission error notification
     - **Property 26: Form Submission Error Notification**
     - **Validates: Requirements 9.4**
   
-  - [~] 18.6 Write property test for form loading state
+  - [ ] 18.6 Write property test for form loading state
     - **Property 24: Form Submission Loading State**
     - **Validates: Requirements 9.2**
   
