@@ -1,5 +1,5 @@
 /**
- * Blog Listing Page
+ * Modern Blog Listing Page
  * 
  * Server-side rendered blog listing page with ISR (Incremental Static Regeneration).
  * Displays all published blog posts with loading states during data fetching.
@@ -10,6 +10,7 @@
  * - ISR with 1-hour revalidation (3600 seconds)
  * - Displays blog posts from Google Sheets via cached data
  * - Client-side search and filtering
+ * - Modern card design with hover effects
  * - Loading states handled by loading.tsx
  * 
  * Requirements: 1.4, 4.2, 4.9, 4.10, 9.1, 12.7
@@ -19,6 +20,8 @@ import { Suspense } from 'react';
 import { getCachedBlogPosts } from '@/lib/cache';
 import { Metadata } from 'next';
 import { BlogListingClient } from '@/components/blog-listing-client';
+import { Breadcrumb } from '@/components/breadcrumb';
+import { BookOpen, TrendingUp, Sparkles } from 'lucide-react';
 
 // ISR: Revalidate every hour (3600 seconds)
 // Requirement: 12.7 - Implement incremental static regeneration for blog posts
@@ -30,7 +33,7 @@ export const revalidate = 3600;
  */
 export const metadata: Metadata = {
   title: 'Blog | Colour Clouds Digital',
-  description: 'Read our latest articles on app development, digital content creation, and technology insights.',
+  description: 'Read our latest articles on app development, digital content creation, and technology insights. Stay updated with industry trends and best practices.',
   alternates: {
     canonical: '/blog',
   },
@@ -43,7 +46,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Loading Skeleton Component
+ * Modern Loading Skeleton Component
  * Displayed while blog posts are being fetched
  * Requirement: 9.1 - Display loading indicator during data fetching
  */
@@ -51,19 +54,25 @@ function BlogListingSkeleton() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {[1, 2, 3, 4, 5, 6].map((i) => (
-        <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
-          <div className="w-full h-48 bg-gray-300" />
-          <div className="p-6">
-            <div className="flex gap-2 mb-3">
-              <div className="h-6 w-20 bg-gray-300 rounded-full" />
-              <div className="h-6 w-16 bg-gray-300 rounded-full" />
+        <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
+          <div className="w-full h-56 bg-gradient-to-br from-gray-200 to-gray-300 animate-shimmer" />
+          <div className="p-6 space-y-4">
+            <div className="flex gap-2">
+              <div className="h-6 w-20 bg-gray-200 rounded-full animate-pulse" />
+              <div className="h-6 w-16 bg-gray-200 rounded-full animate-pulse" />
             </div>
-            <div className="h-8 bg-gray-300 rounded mb-2" />
-            <div className="h-4 bg-gray-300 rounded mb-2" />
-            <div className="h-4 bg-gray-300 rounded mb-4 w-3/4" />
-            <div className="flex justify-between">
-              <div className="h-4 w-32 bg-gray-300 rounded" />
-              <div className="h-4 w-20 bg-gray-300 rounded" />
+            <div className="space-y-2">
+              <div className="h-7 bg-gray-200 rounded animate-pulse" />
+              <div className="h-7 bg-gray-200 rounded w-3/4 animate-pulse" />
+            </div>
+            <div className="space-y-2">
+              <div className="h-4 bg-gray-200 rounded animate-pulse" />
+              <div className="h-4 bg-gray-200 rounded animate-pulse" />
+              <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse" />
+            </div>
+            <div className="flex justify-between pt-4 border-t border-gray-200">
+              <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
+              <div className="h-4 w-20 bg-gray-200 rounded animate-pulse" />
             </div>
           </div>
         </div>
@@ -86,8 +95,14 @@ async function BlogPostsGrid() {
 
   if (publishedPosts.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-xl text-gray-600">No blog posts available yet. Check back soon!</p>
+      <div className="text-center py-20">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-6">
+          <BookOpen className="w-10 h-10 text-gray-400" />
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">No Posts Yet</h3>
+        <p className="text-lg text-gray-600">
+          We're working on some amazing content. Check back soon!
+        </p>
       </div>
     );
   }
@@ -120,19 +135,68 @@ async function BlogPostsGrid() {
  */
 export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-cc-green to-cc-blue text-white py-16">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
-          <p className="text-xl md:text-2xl opacity-90">
-            Insights, tutorials, and stories from the Colour Clouds Digital team
-          </p>
+    <main className="min-h-screen">
+      {/* Breadcrumb Navigation */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="container mx-auto max-w-7xl">
+          <Breadcrumb
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Blog', href: '/blog' },
+            ]}
+          />
+        </div>
+      </div>
+
+      {/* Modern Hero Section */}
+      <section className="relative bg-gradient-to-br from-cc-green/10 via-cc-blue/10 to-background py-20 md:py-28 overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
+            backgroundSize: '40px 40px'
+          }} />
+        </div>
+
+        <div className="relative container mx-auto px-4 max-w-7xl">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-cc-green/10 rounded-full text-cc-green font-semibold text-sm mb-2">
+              <Sparkles className="w-4 h-4" />
+              <span>Insights & Stories</span>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              Explore Our <span className="text-cc-green">Blog</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
+              Insights, tutorials, and stories from the Colour Clouds Digital team. 
+              Stay updated with the latest in app development and digital content creation.
+            </p>
+
+            {/* Stats */}
+            <div className="flex flex-wrap justify-center gap-8 pt-8">
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-2 text-3xl font-bold text-cc-green mb-1">
+                  <TrendingUp className="w-8 h-8" />
+                  <span>50+</span>
+                </div>
+                <div className="text-sm text-gray-600">Articles Published</div>
+              </div>
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-2 text-3xl font-bold text-cc-blue mb-1">
+                  <BookOpen className="w-8 h-8" />
+                  <span>10K+</span>
+                </div>
+                <div className="text-sm text-gray-600">Monthly Readers</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Blog Posts Grid */}
-      <section className="container mx-auto px-4 max-w-7xl py-12">
+      <section className="container mx-auto px-4 max-w-7xl py-16 md:py-20">
         <Suspense fallback={<BlogListingSkeleton />}>
           <BlogPostsGrid />
         </Suspense>

@@ -417,7 +417,7 @@ export default function ServicesPage() {
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="border-white text-white hover:bg-white/10"
+                  className="border-white bg-transparent text-white hover:bg-white/10"
                 >
                   View Our Portfolio
                 </Button>
