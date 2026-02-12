@@ -53,7 +53,7 @@ interface FormState {
 
 const CONTACT_INFO = {
   email: 'colourclouds042@gmail.com',
-  phone: '+1 (555) 123-4567', // TODO: Replace with actual phone number
+  phone: '+234 (811) 3708 920', 
   social: {
     twitter: 'https://twitter.com/colourclouds',
     linkedin: 'https://linkedin.com/company/colourclouds',
@@ -676,7 +676,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground mt-4">
-                * All times are in EST (Eastern Standard Time)
+                * All times are in WAT (West African Time)
               </p>
             </div>
           </div>

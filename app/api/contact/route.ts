@@ -21,6 +21,7 @@ import { rateLimit } from '@/lib/rate-limit';
 import { ValidationError, GoogleSheetsError, RateLimitError, ContactSubmission } from '@/lib/types';
 import { randomUUID } from 'crypto';
 import { sendContactFormNotification, sendContactConfirmation } from '@/lib/nodemailer';
+import { getWATTimestamp } from '@/lib/timezone';
 
 /**
  * Rate limiter for contact form submissions
@@ -181,7 +182,7 @@ export async function POST(request: NextRequest) {
       email: sanitizedEmail,
       subject: sanitizedSubject,
       message: sanitizedMessage,
-      submittedAt: new Date().toISOString(),
+      submittedAt: getWATTimestamp(),
       status: 'new',
       ipAddress: ip !== 'anonymous' ? ip : undefined,
     };

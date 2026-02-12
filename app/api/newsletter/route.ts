@@ -19,6 +19,7 @@ import { sanitizeEmail, sanitizeInput } from '@/lib/sanitize';
 import { formRateLimiter } from '@/lib/rate-limit';
 import { ValidationError, GoogleSheetsError, RateLimitError, Subscriber } from '@/lib/types';
 import { sendNewsletterNotification, sendNewsletterWelcome } from '@/lib/nodemailer';
+import { getWATTimestamp } from '@/lib/timezone';
 
 /**
  * POST handler for newsletter subscription
@@ -110,7 +111,7 @@ export async function POST(request: NextRequest) {
     const subscriber: Subscriber = {
       email: sanitizedEmail,
       name: sanitizedName,
-      subscribedAt: new Date().toISOString(),
+      subscribedAt: getWATTimestamp(),
       source: sanitizedSource,
       status: 'active',
     };
