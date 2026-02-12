@@ -1,8 +1,10 @@
 import PreviewComponent from "@/components/previewComponent";
 import Types from "../list";
 
-export default function Page({ params, searchParams }: any) {
-  const selectedType = Types.find((type) => type.component === params.inators);
+export default async function Page({ params, searchParams }: any) {
+  // Await params in Next.js 15+
+  const resolvedParams = await params;
+  const selectedType = Types.find((type) => type.component === resolvedParams.inators);
 
   //  console.log(selectedType?.types)
 

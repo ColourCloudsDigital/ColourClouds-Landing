@@ -185,7 +185,7 @@ export default function ServicesPage() {
                   <ArrowRight className="ml-2 h-4 w-4 arrow-animate" />
                 </Button>
               </Link>
-              <Link href="/blog">
+              <Link href="/inators">
                 <Button size="lg" variant="outline">
                   View Our Work
                 </Button>
