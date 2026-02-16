@@ -56,7 +56,8 @@ const CONTACT_INFO = {
   phone: '+234 (811) 3708 920', 
   social: {
     twitter: 'https://twitter.com/colourclouds',
-    linkedin: 'https://linkedin.com/company/colourclouds',
+    linkedin: 'https://www.linkedin.com/company/colour-clouds-ng/?viewAsMember=true',
+    facebook: 'https://www.facebook.com/share/19kf8hGM91/',
     instagram: 'https://instagram.com/colourclouds',
     github: 'https://github.com/colourclouds',
   }

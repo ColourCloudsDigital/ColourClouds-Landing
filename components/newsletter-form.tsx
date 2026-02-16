@@ -375,7 +375,7 @@ export function NewsletterForm({
               formState.errors.name ? 'newsletter-name-error' : undefined
             }
             className={cn({
-              'border-destructive focus-visible:ring-destructive': formState.errors.name,
+              'color-black border-destructive focus-visible:ring-destructive': formState.errors.name,
             })}
           />
           {formState.errors.name && (

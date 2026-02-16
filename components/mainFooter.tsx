@@ -14,7 +14,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { NewsletterForm } from './newsletter-form'
-import { Mail, Github, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react'
+import { Mail, Github, Twitter, Linkedin, Instagram, Facebook, ArrowRight } from 'lucide-react'
 import CcLogo from '../app/cc-logo.svg';
 
 const MainFooter = () => {
@@ -46,8 +46,14 @@ const MainFooter = () => {
       color: "hover:bg-cc-blue"
     },
     {
+      name: "Facebook",
+      href: "https://www.facebook.com/share/19kf8hGM91/",
+      icon: Facebook,
+      color: "hover:bg-blue-600"
+    },
+    {
       name: "LinkedIn",
-      href: "https://linkedin.com/company/colourclouds",
+      href: "https://www.linkedin.com/company/colour-clouds-ng/?viewAsMember=true",
       icon: Linkedin,
       color: "hover:bg-cc-blue"
     },
