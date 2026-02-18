@@ -35,7 +35,7 @@ const MainFooter = () => {
     },
     {
       name: "GitHub",
-      href: "https://github.com/ColourCloudsDigital",
+      href: "https://github.com/ColourClouds-dev",
       icon: Github,
       color: "hover:bg-gray-700"
     },

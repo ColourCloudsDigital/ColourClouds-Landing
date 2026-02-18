@@ -69,7 +69,7 @@ describe('Property 2: Footer Component Consistency', () => {
 
   const requiredSocialLinks = [
     { name: 'Email', href: 'mailto:colourclouds042@gmail.com' },
-    { name: 'GitHub', href: 'https://github.com/ColourCloudsDigital' },
+    { name: 'GitHub', href: 'https://github.com/ColourClouds-dev' },
     { name: 'Twitter', href: 'https://twitter.com/colourclouds' },
     { name: 'LinkedIn', href: 'https://linkedin.com/company/colourclouds' },
     { name: 'Instagram', href: 'https://instagram.com/colourclouds' },

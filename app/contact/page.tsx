@@ -59,7 +59,7 @@ const CONTACT_INFO = {
     linkedin: 'https://www.linkedin.com/company/colour-clouds-ng/?viewAsMember=true',
     facebook: 'https://www.facebook.com/share/19kf8hGM91/',
     instagram: 'https://instagram.com/colourclouds',
-    github: 'https://github.com/colourclouds',
+    github: 'https://github.com/ColourClouds-dev',
   }
 }
 
