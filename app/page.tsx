@@ -233,18 +233,18 @@ export default function Home() {
       </section>
 
       {/* FAQ Section - Modern Accordion Design */}
-      <section className="py-20 md:py-32 bg-gray-50">
+      <section className="py-20 md:py-32 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-cc-blue/10 rounded-full text-cc-blue font-semibold text-sm mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-cc-blue/10 dark:bg-cc-blue/20 rounded-full text-cc-blue font-semibold text-sm mb-4">
               <Target className="w-4 h-4" />
               <span>FAQ</span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 dark:text-white">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 dark:text-gray-400">
               Here are some of our FAQs. If you have any other questions you'd like answered, 
               please feel free to contact us.
             </p>
@@ -252,8 +252,8 @@ export default function Home() {
 
           {/* FAQ Items */}
           <div className="space-y-4">
-            <details className="group bg-white rounded-xl border border-gray-200 hover:border-cc-green/50 transition-all duration-300 shadow-sm hover:shadow-md">
-              <summary className="px-6 py-5 cursor-pointer list-none flex items-center justify-between font-semibold text-lg">
+            <details className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-cc-green/50 dark:hover:border-cc-green/50 transition-all duration-300 shadow-sm hover:shadow-md">
+              <summary className="px-6 py-5 cursor-pointer list-none flex items-center justify-between font-semibold text-lg dark:text-white">
                 <span>What services does Colour Clouds Digital offer?</span>
                 <span className="text-cc-green transition-transform group-open:rotate-180">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -261,7 +261,7 @@ export default function Home() {
                   </svg>
                 </span>
               </summary>
-              <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+              <div className="px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
                 We specialize in app development and digital content creation, ranging from mobile 
                 solutions to interactive digital platforms. Our services include custom web and mobile 
                 app development, UI/UX design, video production, photography, and comprehensive digital 
@@ -269,8 +269,8 @@ export default function Home() {
               </div>
             </details>
 
-            <details className="group bg-white rounded-xl border border-gray-200 hover:border-cc-green/50 transition-all duration-300 shadow-sm hover:shadow-md">
-              <summary className="px-6 py-5 cursor-pointer list-none flex items-center justify-between font-semibold text-lg">
+            <details className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-cc-green/50 dark:hover:border-cc-green/50 transition-all duration-300 shadow-sm hover:shadow-md">
+              <summary className="px-6 py-5 cursor-pointer list-none flex items-center justify-between font-semibold text-lg dark:text-white">
                 <span>How can I get started with your services?</span>
                 <span className="text-cc-green transition-transform group-open:rotate-180">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -278,15 +278,15 @@ export default function Home() {
                   </svg>
                 </span>
               </summary>
-              <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+              <div className="px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
                 Simply click on our "Start Your Digital Journey" button or visit our contact page. 
                 We'll walk you through the process of bringing your project to life, starting with 
                 a free consultation to understand your needs and goals.
               </div>
             </details>
 
-            <details className="group bg-white rounded-xl border border-gray-200 hover:border-cc-green/50 transition-all duration-300 shadow-sm hover:shadow-md">
-              <summary className="px-6 py-5 cursor-pointer list-none flex items-center justify-between font-semibold text-lg">
+            <details className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-cc-green/50 dark:hover:border-cc-green/50 transition-all duration-300 shadow-sm hover:shadow-md">
+              <summary className="px-6 py-5 cursor-pointer list-none flex items-center justify-between font-semibold text-lg dark:text-white">
                 <span>Do you offer custom solutions?</span>
                 <span className="text-cc-green transition-transform group-open:rotate-180">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -294,15 +294,15 @@ export default function Home() {
                   </svg>
                 </span>
               </summary>
-              <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+              <div className="px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
                 Yes! Every project is tailored to meet your unique needs and business goals. 
                 We don't believe in one-size-fits-all solutions. Our team works closely with you 
                 to create something that stands out and delivers real results for your business.
               </div>
             </details>
 
-            <details className="group bg-white rounded-xl border border-gray-200 hover:border-cc-green/50 transition-all duration-300 shadow-sm hover:shadow-md">
-              <summary className="px-6 py-5 cursor-pointer list-none flex items-center justify-between font-semibold text-lg">
+            <details className="group bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-cc-green/50 dark:hover:border-cc-green/50 transition-all duration-300 shadow-sm hover:shadow-md">
+              <summary className="px-6 py-5 cursor-pointer list-none flex items-center justify-between font-semibold text-lg dark:text-white">
                 <span>What is your typical project timeline?</span>
                 <span className="text-cc-green transition-transform group-open:rotate-180">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -310,7 +310,7 @@ export default function Home() {
                   </svg>
                 </span>
               </summary>
-              <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+              <div className="px-6 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
                 Project timelines vary depending on scope and complexity. A simple website might take 
                 2-4 weeks, while a complex mobile app could take 3-6 months. We'll provide a detailed 
                 timeline during our initial consultation and keep you updated throughout the development process.
@@ -320,12 +320,12 @@ export default function Home() {
 
           {/* CTA at bottom of FAQ */}
           <div className="text-center mt-12">
-            <p className="text-gray-600 mb-4">Still have questions?</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">Still have questions?</p>
             <Link href="/contact">
               <Button 
                 size="lg"
                 variant="outline"
-                className="text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group border-2 border-cc-green text-cc-green hover:bg-cc-green hover:text-white transition-all duration-300"
+                className="text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group border-2 border-cc-green text-cc-green hover:bg-cc-green hover:text-white dark:border-cc-green dark:text-cc-green dark:hover:bg-cc-green dark:hover:text-white transition-all duration-300"
               >
                 Contact Us
               </Button>

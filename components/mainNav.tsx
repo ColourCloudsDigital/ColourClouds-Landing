@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import CcLogo from '../app/cc-logo.svg';
+import { ThemeToggle } from "./theme-toggle";
 
 /**
  * Modern Main Navigation Component
@@ -14,6 +15,7 @@ import CcLogo from '../app/cc-logo.svg';
  * - Smooth scroll behavior with show/hide on scroll
  * - Active link highlighting
  * - Mobile-responsive hamburger menu with slide-in drawer
+ * - Dark mode toggle
  * - Smooth animations and transitions
  * 
  * Requirements: 1.7, 1.9
@@ -64,8 +66,8 @@ export default function MainNav() {
       <nav 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-md' 
-            : 'bg-white/80 backdrop-blur-sm shadow-sm'
+            ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-md' 
+            : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-sm'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -90,28 +92,36 @@ export default function MainNav() {
                     className={`px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 ${
                       isActive
                         ? 'text-cc-green bg-cc-green/10'
-                        : 'text-gray-700 hover:text-cc-green hover:bg-gray-100'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-cc-green hover:bg-gray-100 dark:hover:bg-gray-800'
                     }`}
                   >
                     {item.title}
                   </Link>
                 );
               })}
+              
+              {/* Theme Toggle */}
+              <div className="ml-2">
+                <ThemeToggle />
+              </div>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
+            {/* Mobile Menu Button & Theme Toggle */}
+            <div className="md:hidden flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle menu"
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -127,13 +137,13 @@ export default function MainNav() {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-[280px] bg-white z-50 md:hidden transform transition-transform duration-300 ease-in-out shadow-2xl ${
+        className={`fixed top-0 right-0 h-full w-[280px] bg-white dark:bg-gray-900 z-50 md:hidden transform transition-transform duration-300 ease-in-out shadow-2xl ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Mobile Menu Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
             <Link
               href="/"
               aria-label="Back to homepage"
@@ -142,7 +152,7 @@ export default function MainNav() {
               <CcLogo className="w-[100px] h-auto" />
             </Link>
             <button
-              className="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
               aria-label="Close menu"
             >
@@ -162,7 +172,7 @@ export default function MainNav() {
                       className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
                         isActive
                           ? 'text-cc-green bg-cc-green/10'
-                          : 'text-gray-700 hover:text-cc-green hover:bg-gray-100'
+                          : 'text-gray-700 dark:text-gray-300 hover:text-cc-green hover:bg-gray-100 dark:hover:bg-gray-800'
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -175,8 +185,8 @@ export default function MainNav() {
           </nav>
 
           {/* Mobile Menu Footer */}
-          <div className="p-6 border-t border-gray-200">
-            <p className="text-sm text-gray-600 text-center">
+          <div className="p-6 border-t border-gray-200 dark:border-gray-800">
+            <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
               © {new Date().getFullYear()} Colour Clouds Digital
             </p>
           </div>

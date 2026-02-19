@@ -4,6 +4,7 @@ import "./globals.css";
 import MainNav from "@/components/mainNav";
 import MainFooter from "@/components/mainFooter";
 import { NewsletterPopup } from "@/components/newsletter-popup";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -31,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           async
@@ -40,17 +41,19 @@ export default function RootLayout({
         ></script>
       </head>
       <body className={inter.className}>
-        <div className="">
-          <MainNav />
-        </div>
+        <ThemeProvider defaultTheme="light" storageKey="colour-clouds-theme">
+          <div className="">
+            <MainNav />
+          </div>
 
-        <div className="min-h-screen mt-16">{children}</div>
+          <div className="min-h-screen mt-16">{children}</div>
 
-        <div>
-          <MainFooter />
-        </div>
-        <Toaster />
-        <NewsletterPopup />
+          <div>
+            <MainFooter />
+          </div>
+          <Toaster />
+          <NewsletterPopup />
+        </ThemeProvider>
       </body>
     </html>
   );
