@@ -45,10 +45,10 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Content */}
             <div className="space-y-8 animate-slideUp">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-cc-green/10 rounded-full text-cc-green font-medium text-sm">
+              {/* <div className="inline-flex items-center gap-2 px-4 py-2 bg-cc-green/10 rounded-full text-cc-green font-medium text-sm">
                 <Sparkles className="w-4 h-4" />
                 <span>Welcome to Colour Clouds Digital</span>
-              </div>
+              </div> */}
               
               <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight">
                 Think <br />
@@ -183,7 +183,7 @@ export default function Home() {
                 <Link href="/services">
                   <Button 
                     size="lg"
-                    className="bg-cc-green hover:bg-cc-green-600 text-white group"
+                    className="bg-cc-green hover:bg-cc-green-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group text-white group"
                   >
                     Explore Our Services
                     <ArrowRight className="ml-2 h-5 w-5 arrow-animate" />
@@ -325,7 +325,7 @@ export default function Home() {
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-2 border-cc-green text-cc-green hover:bg-cc-green hover:text-white transition-all duration-300"
+                className="text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group border-2 border-cc-green text-cc-green hover:bg-cc-green hover:text-white transition-all duration-300"
               >
                 Contact Us
               </Button>

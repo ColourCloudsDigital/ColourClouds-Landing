@@ -290,9 +290,9 @@ export default function AboutPage() {
                 Each member brings unique expertise and a shared commitment to excellence.
               </p>
               <Link href="/contact">
-                <Button size="lg" className="bg-[#0072FF] hover:bg-[#0072FF]/90 text-white">
+                <Button size="lg" className="bg-cc-blue hover:bg-cc-blue/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group">
                   Join Our Team
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-4 w-4 arrow-animate" />
                 </Button>
               </Link>
             </div>
@@ -315,18 +315,17 @@ export default function AboutPage() {
               <Link href="/contact">
                 <Button 
                   size="lg" 
-                  variant="secondary"
-                  className="bg-white text-[#01A750] hover:bg-white/90"
+                  className="bg-white text-cc-green hover:bg-gray-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group"
                 >
                   Get in Touch
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-4 w-4 arrow-animate" />
                 </Button>
               </Link>
               <Link href="/services">
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="border-white bg-transparent text-white hover:bg-white"
+                  className="border-2 border-white text-white hover:bg-white hover:text-cc-green transition-all duration-300 hover:scale-105 active:scale-95"
                 >
                   View Our Services
                 </Button>
