@@ -174,23 +174,6 @@ export default function BlogPage() {
               Stay updated with the latest in app development and digital content creation.
             </p>
 
-            {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-8 pt-8">
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 text-3xl font-bold text-cc-green mb-1">
-                  <TrendingUp className="w-8 h-8" />
-                  <span>50+</span>
-                </div>
-                <div className="text-sm text-gray-600">Articles Published</div>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 text-3xl font-bold text-cc-blue mb-1">
-                  <BookOpen className="w-8 h-8" />
-                  <span>10K+</span>
-                </div>
-                <div className="text-sm text-gray-600">Monthly Readers</div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

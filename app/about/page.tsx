@@ -260,46 +260,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Section (Optional - Placeholder) */}
-      <section className="py-16 md:py-24 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            {/* Section Header */}
-            <div className="text-center mb-12 md:mb-16">
-              <span className="inline-block px-4 py-1 mb-4 text-sm font-semibold text-[#0072FF] bg-[#0072FF]/10 rounded-full">
-                Our Team
-              </span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Meet the Creators
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Behind every great project is a talented team of professionals who bring 
-                passion, expertise, and creativity to everything they do.
-              </p>
-            </div>
-
-            {/* Team Content */}
-            <div className="bg-card rounded-lg border border-border p-8 md:p-12 text-center">
-              <Users className="h-16 w-16 text-[#0072FF] mx-auto mb-6" />
-              <h3 className="text-2xl font-bold mb-4">
-                A Diverse Team of Experts
-              </h3>
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Our team consists of skilled developers, creative designers, content creators, 
-                and digital strategists who work together to deliver exceptional results. 
-                Each member brings unique expertise and a shared commitment to excellence.
-              </p>
-              <Link href="/contact">
-                <Button size="lg" className="bg-cc-blue hover:bg-cc-blue/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group">
-                  Join Our Team
-                  <ArrowRight className="ml-2 h-4 w-4 arrow-animate" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-[#01A750] to-[#0072FF] text-white">
         <div className="container mx-auto px-4">
@@ -311,7 +271,7 @@ export default function AboutPage() {
               Ready to start your digital journey? We'd love to hear about your project 
               and explore how we can help bring your vision to life.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/contact">
                 <Button 
                   size="lg" 

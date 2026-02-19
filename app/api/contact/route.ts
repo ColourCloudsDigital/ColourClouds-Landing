@@ -22,6 +22,7 @@ import { ValidationError, GoogleSheetsError, RateLimitError, ContactSubmission }
 import { randomUUID } from 'crypto';
 import { sendContactFormNotification, sendContactConfirmation } from '@/lib/nodemailer';
 import { getWATTimestamp } from '@/lib/timezone';
+import { verifyRecaptcha } from '@/lib/recaptcha';
 
 /**
  * Rate limiter for contact form submissions
@@ -51,6 +52,7 @@ const MIN_SUBMISSION_TIME = 3000; // 3 seconds
  *   message: string (required) - Message content
  *   honeypot?: string (optional) - Honeypot field for spam detection (should be empty)
  *   timestamp?: number (optional) - Form load timestamp for time-based validation
+ *   recaptchaToken: string (required) - reCAPTCHA v3 token for spam protection
  * }
  * 
  * Response:
@@ -141,6 +143,36 @@ export async function POST(request: NextRequest) {
           { status: 200 }
         );
       }
+    }
+
+    // Verify reCAPTCHA token
+    // Requirements: 11.2 - Spam protection
+    const recaptchaToken = body.recaptchaToken;
+    
+    if (!recaptchaToken) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'reCAPTCHA verification required.' 
+        },
+        { status: 400 }
+      );
+    }
+
+    const isRecaptchaValid = await verifyRecaptcha(
+      recaptchaToken,
+      'contact_submit',
+      0.5 // Minimum score threshold
+    );
+
+    if (!isRecaptchaValid) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'reCAPTCHA verification failed. Please try again.' 
+        },
+        { status: 400 }
+      );
     }
 
     // Validate input

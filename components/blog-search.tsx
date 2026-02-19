@@ -87,7 +87,7 @@ export function BlogSearch({
       <div className="relative">
         {/* Search Icon */}
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-          <Search className="h-5 w-5 text-gray-400" aria-hidden="true" />
+          <Search className="h-5 w-5 text-gray-400 dark:text-gray-50" aria-hidden="true" />
         </div>
 
         {/* Search Input */}
@@ -98,11 +98,11 @@ export function BlogSearch({
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder={placeholder}
-          className="block w-full pl-12 pr-12 py-3 border border-gray-300 rounded-lg 
+          className="block w-full pl-12 pr-12 py-3 border border-gray-300 dark:border-gray-500 rounded-lg 
                      focus:ring-2 focus:ring-cc-green focus:border-cc-green 
                      text-gray-900 placeholder-gray-500
                      transition-colors duration-200
-                     hover:border-gray-400"
+                     hover:border-gray-400 dark:bg-gray-700"
           aria-label="Search blog posts by title, content, or author"
           autoComplete="off"
         />

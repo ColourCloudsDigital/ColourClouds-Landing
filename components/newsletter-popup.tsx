@@ -1,272 +1,205 @@
 "use client"
 
 /**
- * Newsletter Popup Modal Component
+ * Newsletter Popup Modal Component - Cute Design
  * 
- * A centered modal that appears 5 seconds after page load to encourage
- * newsletter subscriptions. Features:
+ * A centered modal with cute envelope icon that appears 5 seconds after page load.
+ * Features:
  * - 5-second delay before display
  * - Backdrop blur for emphasis
  * - localStorage persistence for user preferences
  * - Smooth animations
  * - Mobile responsive
- * - Colour Clouds brand colors
- * 
- * Display Conditions:
- * - Shows after 5 seconds
- * - Respects "don't show again" preference
- * - Doesn't show if user already subscribed
- * - Doesn't show if dismissed in current session
+ * - Colour Clouds brand colors (cc-green)
+ * - Dark mode support
+ * - "Don't show again" checkbox
+ * - "Maybe Later" option
+ * - Google reCAPTCHA v3 protection
  */
 
 import * as React from "react"
-import { X } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { X, Mail } from "lucide-react"
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 export function NewsletterPopup() {
-  // State management
-  const [isVisible, setIsVisible] = React.useState(false)
-  const [isSubmitting, setIsSubmitting] = React.useState(false)
-  const [showSuccess, setShowSuccess] = React.useState(false)
-  const [dontShowAgain, setDontShowAgain] = React.useState(false)
+  const { executeRecaptcha } = useGoogleReCaptcha()
+  const [isOpen, setIsOpen] = React.useState(false)
   const [email, setEmail] = React.useState("")
-  const [name, setName] = React.useState("")
+  const [dontShowAgain, setDontShowAgain] = React.useState(false)
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const [isSuccess, setIsSuccess] = React.useState(false)
   const [error, setError] = React.useState("")
 
-  // Check localStorage and set timer on mount
   React.useEffect(() => {
-    // Check if popup should be shown
-    const dismissed = localStorage.getItem('newsletter-popup-dismissed')
-    const dontShow = localStorage.getItem('newsletter-popup-dont-show')
-    const subscribed = localStorage.getItem('newsletter-popup-subscribed')
-    
-    // Don't show if any condition is met
-    if (dismissed || dontShow || subscribed) {
+    // Check if user has dismissed the popup
+    const dismissed = localStorage.getItem("newsletter-popup-dismissed")
+    if (dismissed === "true") {
       return
     }
-    
-    // Set 5-second delay timer
+
+    // Show popup after 5 seconds
     const timer = setTimeout(() => {
-      setIsVisible(true)
+      setIsOpen(true)
     }, 5000)
-    
-    // Cleanup timer on unmount
+
     return () => clearTimeout(timer)
   }, [])
 
-  // Handle ESC key press
-  React.useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isVisible) {
-        handleClose()
-      }
-    }
-
-    if (isVisible) {
-      document.addEventListener('keydown', handleEscape)
-      // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden'
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
-    }
-  }, [isVisible])
-
-  // Close modal (can show again on next visit)
   const handleClose = () => {
-    setIsVisible(false)
-    localStorage.setItem('newsletter-popup-dismissed', 'true')
-  }
-
-  // Close modal on backdrop click
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      handleClose()
+    if (dontShowAgain) {
+      localStorage.setItem("newsletter-popup-dismissed", "true")
     }
+    setIsOpen(false)
+    document.body.style.overflow = "unset"
   }
 
-  // Handle form submission
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitting(true)
     setError("")
 
-    // Basic validation
-    if (!email.trim()) {
-      setError("Email is required")
+    // Check if reCAPTCHA is available
+    if (!executeRecaptcha) {
+      setError('Security check not ready. Please wait a moment.')
+      setIsSubmitting(false)
       return
     }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please enter a valid email address")
-      return
-    }
-
-    setIsSubmitting(true)
 
     try {
-      const response = await fetch('/api/newsletter', {
-        method: 'POST',
+      // Execute reCAPTCHA challenge
+      const recaptchaToken = await executeRecaptcha('newsletter_popup')
+
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: email.trim(),
-          name: name.trim() || undefined,
-          source: '/popup',
+          source: "/popup",
+          recaptchaToken,
         }),
       })
 
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error || 'Failed to subscribe. Please try again.')
-        setIsSubmitting(false)
-        return
+        throw new Error(data.error || "Failed to subscribe")
       }
 
       // Success!
-      setShowSuccess(true)
-      localStorage.setItem('newsletter-popup-subscribed', 'true')
-      
-      // Save "don't show again" preference if checked
-      if (dontShowAgain) {
-        localStorage.setItem('newsletter-popup-dont-show', 'true')
-      }
+      setIsSuccess(true)
+      setEmail("")
 
-      // Close modal after 2 seconds
+      // Close popup after 2 seconds
       setTimeout(() => {
-        setIsVisible(false)
+        handleClose()
       }, 2000)
-
-    } catch (error) {
-      setError('Network error. Please check your connection and try again.')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong")
+    } finally {
       setIsSubmitting(false)
     }
   }
 
-  // Don't render if not visible
-  if (!isVisible) {
-    return null
-  }
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+  }, [isOpen])
+
+  if (!isOpen) return null
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-300"
-      onClick={handleBackdropClick}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="newsletter-popup-title"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm animate-fadeIn"
+      onClick={handleClose}
     >
-      <div className="relative bg-white rounded-lg shadow-2xl max-w-md w-full p-8 animate-in fade-in zoom-in duration-300">
-        {/* Close Button */}
+      <div
+        className="relative bg-gray-50 dark:bg-gray-800 rounded-3xl p-6 max-w-[320px] w-[90vw] text-center shadow-2xl animate-slideUp"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-          aria-label="Close newsletter popup"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+          aria-label="Close"
         >
           <X className="w-5 h-5" />
         </button>
 
-        {/* Success State */}
-        {showSuccess ? (
-          <div className="text-center py-8">
-            <div className="w-16 h-16 bg-[#01A750] rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg
-                className="w-8 h-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              Successfully Subscribed!
-            </h3>
-            <p className="text-gray-600">
-              Thank you for subscribing to our newsletter.
-            </p>
-          </div>
-        ) : (
+        {!isSuccess ? (
           <>
-            {/* Header */}
-            <div className="mb-6">
-              <h2
-                id="newsletter-popup-title"
-                className="text-2xl font-bold text-gray-900 mb-3"
-              >
-                Stay Updated with Our Latest Insights
-              </h2>
-              <p className="text-gray-600">
-                Get exclusive tips, tutorials, and updates delivered straight to your inbox.
-              </p>
-            </div>
+            {/* Cute envelope icon */}
+            <svg
+              width="60"
+              height="50"
+              viewBox="0 0 60 50"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="mx-auto mb-4"
+            >
+              {/* Envelope body */}
+              <rect x="5" y="10" width="50" height="30" rx="5" fill="#01A750" />
+              {/* Flap */}
+              <path d="M5 10L30 30L55 10" fill="#01A750" />
+              {/* Closed eyes */}
+              <path
+                d="M18 22Q23 18 28 22"
+                stroke="#333"
+                strokeWidth="2"
+                fill="none"
+              />
+              <path
+                d="M32 22Q37 18 42 22"
+                stroke="#333"
+                strokeWidth="2"
+                fill="none"
+              />
+              {/* Hearts (simple circles for cheeks) */}
+              <circle cx="20" cy="30" r="3" fill="#FF69B4" />
+              <circle cx="40" cy="30" r="3" fill="#FF69B4" />
+            </svg>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Email Input */}
-              <div>
-                <label htmlFor="popup-email" className="sr-only">
-                  Email Address
-                </label>
+            <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+              Join Newsletter
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Stay updated with our latest news, tips, and exclusive offers.
+            </p>
+
+            {/* Email input with icon */}
+            <form onSubmit={handleSubmit}>
+              <div className="relative mb-3">
                 <input
-                  id="popup-email"
                   type="email"
-                  placeholder="Enter your email address"
+                  placeholder="Example@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  disabled={isSubmitting}
-                  className={cn(
-                    "w-full px-4 py-3 rounded-lg border text-black transition-colors",
-                    error
-                      ? "border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:ring-[#0072FF] focus:border-[#0072FF]",
-                    "focus:outline-none focus:ring-2"
-                  )}
                   required
-                />
-              </div>
-
-              {/* Name Input (Optional) */}
-              <div>
-                <label htmlFor="popup-name" className="sr-only">
-                  Name (Optional)
-                </label>
-                <input
-                  id="popup-name"
-                  type="text"
-                  placeholder="Your name (optional)"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
                   disabled={isSubmitting}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-[#0072FF] focus:border-[#0072FF] transition-colors"
+                  className="w-full py-3 pl-10 pr-3 rounded-lg border border-gray-300 dark:border-gray-600 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cc-green focus:border-transparent disabled:opacity-50"
                 />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
               </div>
 
-              {/* Error Message */}
+              {/* Error message */}
               {error && (
-                <div className="text-sm text-red-600" role="alert">
-                  {error}
-                </div>
+                <p className="text-sm text-red-500 mb-3 text-left">{error}</p>
               )}
 
-              {/* Submit Button */}
+              {/* Green button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#0072FF] hover:bg-[#0072FF]/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 bg-cc-green hover:bg-cc-green/90 text-white rounded-lg text-base font-bold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {isSubmitting ? (
-                  <span className="flex items-center justify-center">
+                  <>
                     <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      className="animate-spin h-5 w-5"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -286,34 +219,50 @@ export function NewsletterPopup() {
                       />
                     </svg>
                     Subscribing...
-                  </span>
+                  </>
                 ) : (
-                  'Subscribe Now'
+                  <>
+                    Done
+                  </>
                 )}
               </button>
-
-              {/* Don't Show Again Checkbox */}
-              <div className="flex items-center">
-                <input
-                  id="dont-show-again"
-                  type="checkbox"
-                  checked={dontShowAgain}
-                  onChange={(e) => setDontShowAgain(e.target.checked)}
-                  className="w-4 h-4 text-[#0072FF] border-gray-300 rounded focus:ring-[#0072FF]"
-                />
-                <label
-                  htmlFor="dont-show-again"
-                  className="ml-2 text-sm text-gray-600"
-                >
-                  Don't show this again
-                </label>
-              </div>
-
-              {/* Privacy Notice */}
-              <p className="text-xs text-gray-500 text-center">
-                We respect your privacy. Unsubscribe at any time.
-              </p>
             </form>
+
+            <p className="mt-4 text-sm">
+              <button
+                onClick={handleClose}
+                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors underline-offset-2 hover:underline"
+              >
+                Maybe Later
+              </button>
+            </p>
+          </>
+        ) : (
+          <>
+            {/* Success state */}
+            <div className="py-8">
+              <div className="w-16 h-16 bg-cc-green rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={3}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                Successfully Subscribed!
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Thank you for joining our newsletter. Check your email for confirmation.
+              </p>
+            </div>
           </>
         )}
       </div>

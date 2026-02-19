@@ -136,10 +136,10 @@ export default async function BlogPostPage({
   });
   
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-background">
       {/* Breadcrumb Navigation */}
       {/* Requirement: 10.1 - Display breadcrumb navigation showing Home > Blog > [Post Title] */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-card border-b border-border">
         <div className="container mx-auto max-w-4xl">
           <Breadcrumb
             items={[
@@ -200,14 +200,14 @@ export default async function BlogPostPage({
       <article className="container mx-auto px-4 max-w-4xl py-12">
         {/* Excerpt */}
         {post.excerpt && (
-          <div className="text-xl text-gray-600 mb-8 pb-8 border-b border-gray-200">
+          <div className="text-xl text-muted-foreground mb-8 pb-8 border-b border-border">
             {post.excerpt}
           </div>
         )}
         
         {/* Main Content with Markdown Rendering */}
         {/* Requirement: 4.7 - Support markdown formatting in blog post content */}
-        <div className="prose prose-lg max-w-none prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-gray-700 prose-a:text-cc-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-code:text-cc-green prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-img:rounded-lg prose-img:shadow-md">
+        <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-foreground/90 prose-a:text-cc-blue prose-a:no-underline hover:prose-a:underline prose-strong:text-foreground prose-code:text-cc-green prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950 prose-pre:text-gray-100 prose-img:rounded-lg prose-img:shadow-md prose-blockquote:border-cc-green prose-blockquote:text-muted-foreground">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw, rehypeSanitize]}
@@ -218,13 +218,13 @@ export default async function BlogPostPage({
         
         {/* Tags */}
         {post.tags && post.tags.length > 0 && (
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Tags</h2>
+          <div className="mt-12 pt-8 border-t border-border">
+            <h2 className="text-lg font-semibold text-foreground mb-4">Tags</h2>
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                  className="inline-block bg-muted text-foreground px-3 py-1 rounded-full text-sm hover:bg-muted/80 transition-colors"
                 >
                   #{tag}
                 </span>

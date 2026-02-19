@@ -150,7 +150,7 @@ export function BlogFilter({
       {/* Filter Panel */}
       <div
         id="filter-panel"
-        className={`bg-white border border-gray-200 rounded-lg p-6 ${
+        className={`bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-500 rounded-lg p-6 ${
           isExpanded ? 'block' : 'hidden'
         } lg:block`}
         role="region"
@@ -161,7 +161,7 @@ export function BlogFilter({
           <div className="flex-1">
             <label
               htmlFor="category-filter"
-              className="block text-sm font-semibold text-gray-900 mb-3"
+              className="block text-sm font-semibold text-gray-900 dark:text-gray-50 mb-3"
             >
               Category
             </label>
@@ -170,7 +170,7 @@ export function BlogFilter({
               <button
                 type="button"
                 onClick={() => handleCategoryChange(null)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                className={`px-4 py-2 rounded-full text-sm font-medium dark:bg-gray-900 border border-gray-200 dark:border-gray-500 transition-colors duration-200 ${
                   filters.category === null
                     ? 'bg-cc-green text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -186,7 +186,7 @@ export function BlogFilter({
                   key={category}
                   type="button"
                   onClick={() => handleCategoryChange(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 dark:bg-gray-900 border border-gray-200 dark:border-gray-500 dark:text-gray-50 ${
                     filters.category === category
                       ? 'bg-cc-green text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -201,7 +201,7 @@ export function BlogFilter({
 
           {/* Tag Filter */}
           <div className="flex-1">
-            <label className="block text-sm font-semibold text-gray-900 mb-3">
+            <label className="block text-sm font-semibold text-gray-900 dark:text-gray-50 mb-3">
               Tags
             </label>
             <div className="flex flex-wrap gap-2">
@@ -213,7 +213,7 @@ export function BlogFilter({
                     key={tag}
                     type="button"
                     onClick={() => handleTagToggle(tag)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 dark:bg-gray-900 border border-gray-200 dark:border-gray-500 dark:text-gray-50 ${
                       filters.tags.includes(tag)
                         ? 'bg-cc-blue text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

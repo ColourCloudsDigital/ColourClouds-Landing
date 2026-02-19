@@ -178,7 +178,7 @@ export default function ServicesPage() {
               From cutting-edge app development to compelling digital content, 
               we bring your vision to life with expertise and creativity.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/contact">
                 <Button size="lg" className="bg-cc-green hover:bg-cc-green/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group">
                   Start Your Project
@@ -186,7 +186,7 @@ export default function ServicesPage() {
                 </Button>
               </Link>
               <Link href="/inators">
-                <Button size="lg" variant="outline" className="border-2 border-cc-blue text-cc-blue hover:bg-cc-blue hover:text-white transition-all duration-300 hover:scale-105 active:scale-95">
+                <Button size="lg" variant="outline" className="border-2 border-cc-green text-cc-green hover:bg-cc-green hover:text-white transition-all duration-300 hover:scale-105 active:scale-95">
                   View Our Work
                 </Button>
               </Link>
@@ -241,7 +241,7 @@ export default function ServicesPage() {
           </div>
 
           {/* CTA */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 flex justify-center">
             <Link href="/contact">
               <Button size="lg" className="bg-cc-green hover:bg-cc-green/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group">
                 Discuss Your App Project
@@ -298,7 +298,7 @@ export default function ServicesPage() {
           </div>
 
           {/* CTA */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 flex justify-center">
             <Link href="/contact">
               <Button size="lg" className="bg-cc-blue hover:bg-cc-blue/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group">
                 Start Creating Content
@@ -402,7 +402,7 @@ export default function ServicesPage() {
               Let's discuss how we can help you achieve your digital goals. 
               Get in touch today for a free consultation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/contact">
                 <Button 
                   size="lg" 

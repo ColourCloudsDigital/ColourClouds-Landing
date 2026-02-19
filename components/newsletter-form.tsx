@@ -9,12 +9,14 @@
  * - Success/error toast notifications using Sonner
  * - Accessible form labels and error messages
  * - Multiple display variants (inline, modal, footer)
+ * - Google reCAPTCHA v3 protection against spam
  * 
  * Requirements: 3.1, 3.6, 3.7, 9.2, 9.4
  */
 
 import * as React from "react"
 import { toast } from "sonner"
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -87,6 +89,9 @@ export function NewsletterForm({
   onSuccess,
   onError,
 }: NewsletterFormProps) {
+  // reCAPTCHA hook
+  const { executeRecaptcha } = useGoogleReCaptcha()
+
   // Form state management
   const [formState, setFormState] = React.useState<FormState>({
     email: '',
@@ -201,6 +206,15 @@ export function NewsletterForm({
     if (!validateForm()) {
       return
     }
+
+    // Check if reCAPTCHA is available
+    if (!executeRecaptcha) {
+      console.warn('reCAPTCHA not yet loaded')
+      toast.error('Security Check Failed', {
+        description: 'Please wait a moment and try again.',
+      })
+      return
+    }
     
     // Set loading state
     // Requirements: 9.2
@@ -211,6 +225,9 @@ export function NewsletterForm({
     }))
     
     try {
+      // Execute reCAPTCHA challenge
+      const recaptchaToken = await executeRecaptcha('newsletter_submit')
+
       // Submit to API
       const response = await fetch('/api/newsletter', {
         method: 'POST',
@@ -221,6 +238,7 @@ export function NewsletterForm({
           email: formState.email.trim(),
           name: formState.name.trim() || undefined,
           source,
+          recaptchaToken, // Include reCAPTCHA token
         }),
       })
       
@@ -358,36 +376,7 @@ export function NewsletterForm({
           )}
         </div>
 
-        {/* Name Field (Optional) */}
-        <div className={inputGroupClasses}>
-          <Label htmlFor="newsletter-name" className="text-sm font-medium">
-            Name <span className="text-muted-foreground text-xs">(optional)</span>
-          </Label>
-          <Input
-            id="newsletter-name"
-            type="text"
-            placeholder="Your Name"
-            value={formState.name}
-            onChange={handleNameChange}
-            disabled={formState.isSubmitting}
-            aria-invalid={!!formState.errors.name}
-            aria-describedby={
-              formState.errors.name ? 'newsletter-name-error' : undefined
-            }
-            className={cn({
-              'color-black border-destructive focus-visible:ring-destructive': formState.errors.name,
-            })}
-          />
-          {formState.errors.name && (
-            <p
-              id="newsletter-name-error"
-              className="text-sm text-destructive"
-              role="alert"
-            >
-              {formState.errors.name}
-            </p>
-          )}
-        </div>
+        
 
         {/* General Error Message */}
         {formState.errors.general && (
@@ -439,6 +428,29 @@ export function NewsletterForm({
         {/* Privacy Notice */}
         <p className="text-xs text-muted-foreground">
           We respect your privacy. Unsubscribe at any time.
+        </p>
+
+        {/* reCAPTCHA Notice */}
+        <p className="text-xs text-muted-foreground">
+          This site is protected by reCAPTCHA and the Google{' '}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-foreground"
+          >
+            Privacy Policy
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://policies.google.com/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-foreground"
+          >
+            Terms of Service
+          </a>{' '}
+          apply.
         </p>
       </form>
     </div>

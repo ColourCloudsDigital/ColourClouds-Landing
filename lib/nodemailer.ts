@@ -147,7 +147,7 @@ export async function sendContactConfirmation(data: {
           .header { background: linear-gradient(135deg, #0072FF 0%, #005BCC 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
           .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
           .message { background: white; padding: 20px; border-radius: 4px; margin: 20px 0; }
-          .button { display: inline-block; background: #0072FF; color: white; padding: 12px 30px; text-decoration: none; border-radius: 4px; margin: 20px 0; }
+          .button { display: inline-block; background: #0072FF; color: black; padding: 12px 30px; text-decoration: none; border-radius: 4px; margin: 20px 0; }
           .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
         </style>
       </head>

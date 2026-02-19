@@ -40,12 +40,6 @@ const MainFooter = () => {
       color: "hover:bg-gray-700"
     },
     {
-      name: "Twitter",
-      href: "https://twitter.com/colourclouds",
-      icon: Twitter,
-      color: "hover:bg-cc-blue"
-    },
-    {
       name: "Facebook",
       href: "https://www.facebook.com/share/19kf8hGM91/",
       icon: Facebook,
@@ -56,17 +50,11 @@ const MainFooter = () => {
       href: "https://www.linkedin.com/company/colour-clouds-ng/?viewAsMember=true",
       icon: Linkedin,
       color: "hover:bg-cc-blue"
-    },
-    {
-      name: "Instagram",
-      href: "https://instagram.com/colourclouds",
-      icon: Instagram,
-      color: "hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500"
     }
   ]
 
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-20">
+    <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16 md:py-20">
@@ -105,7 +93,7 @@ const MainFooter = () => {
             </div>
 
             {/* Quick Links */}
-            <div>
+            <div className="md:text-center">
               <h3 className="text-white font-semibold text-lg mb-6">Quick Links</h3>
               <ul className="space-y-3">
                 {footerLinks.map((link, idx) => (

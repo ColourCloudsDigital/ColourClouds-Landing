@@ -28,7 +28,7 @@ export const CACHE_TAGS = {
  * Cache revalidation time-to-live (TTL) in seconds
  */
 export const CACHE_REVALIDATE = {
-  BLOG: 3600,        // 1 hour for blog posts
+  BLOG: 60,        // 1 minute for blog posts
   STATIC: 86400,     // 24 hours for static content
   DYNAMIC: 300,      // 5 minutes for dynamic content
 } as const;

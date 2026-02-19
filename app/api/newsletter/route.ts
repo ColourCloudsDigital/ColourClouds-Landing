@@ -20,6 +20,7 @@ import { formRateLimiter } from '@/lib/rate-limit';
 import { ValidationError, GoogleSheetsError, RateLimitError, Subscriber } from '@/lib/types';
 import { sendNewsletterNotification, sendNewsletterWelcome } from '@/lib/nodemailer';
 import { getWATTimestamp } from '@/lib/timezone';
+import { verifyRecaptcha } from '@/lib/recaptcha';
 
 /**
  * POST handler for newsletter subscription
@@ -29,6 +30,7 @@ import { getWATTimestamp } from '@/lib/timezone';
  *   email: string (required) - Subscriber's email address
  *   name?: string (optional) - Subscriber's name
  *   source: string (required) - Page path where subscription occurred
+ *   recaptchaToken: string (required) - reCAPTCHA v3 token for spam protection
  * }
  * 
  * Response:
@@ -72,6 +74,36 @@ export async function POST(request: NextRequest) {
         { 
           success: false, 
           error: 'Invalid request body. Please provide valid JSON.' 
+        },
+        { status: 400 }
+      );
+    }
+
+    // Verify reCAPTCHA token
+    // Requirements: 11.2 - Spam protection
+    const recaptchaToken = body.recaptchaToken;
+    
+    if (!recaptchaToken) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'reCAPTCHA verification required.' 
+        },
+        { status: 400 }
+      );
+    }
+
+    const isRecaptchaValid = await verifyRecaptcha(
+      recaptchaToken,
+      'newsletter_submit',
+      0.5 // Minimum score threshold
+    );
+
+    if (!isRecaptchaValid) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'reCAPTCHA verification failed. Please try again.' 
         },
         { status: 400 }
       );

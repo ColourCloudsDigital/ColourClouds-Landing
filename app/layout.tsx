@@ -5,6 +5,7 @@ import MainNav from "@/components/mainNav";
 import MainFooter from "@/components/mainFooter";
 import { NewsletterPopup } from "@/components/newsletter-popup";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ReCaptchaProvider } from "@/components/recaptcha-provider";
 import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -42,17 +43,19 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ThemeProvider defaultTheme="light" storageKey="colour-clouds-theme">
-          <div className="">
-            <MainNav />
-          </div>
+          <ReCaptchaProvider>
+            <div className="">
+              <MainNav />
+            </div>
 
-          <div className="min-h-screen mt-16">{children}</div>
+            <div className="min-h-screen mt-16">{children}</div>
 
-          <div>
-            <MainFooter />
-          </div>
-          <Toaster />
-          <NewsletterPopup />
+            <div>
+              <MainFooter />
+            </div>
+            <Toaster />
+            <NewsletterPopup />
+          </ReCaptchaProvider>
         </ThemeProvider>
       </body>
     </html>

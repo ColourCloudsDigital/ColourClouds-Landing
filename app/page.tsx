@@ -60,7 +60,7 @@ export default function Home() {
                 Shaping Digital Experiences, One App at a Time
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 items-center md:items-start">
                 <Link href="/services">
                   <Button 
                     size="lg" 
@@ -74,32 +74,16 @@ export default function Home() {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="border-2 border-gray-300 hover:border-cc-blue hover:text-cc-blue transition-all duration-300 hover:scale-105 active:scale-95"
+                    className="border-2 border-cc-green text-cc-green hover:bg-cc-green hover:text-white transition-all duration-300 hover:scale-105 active:scale-95"
                   >
                     Learn More
                   </Button>
                 </Link>
               </div>
-
-              {/* Stats or Trust Indicators */}
-              <div className="flex flex-wrap gap-8 pt-8 border-t border-gray-200">
-                <div>
-                  <div className="text-3xl font-bold text-cc-green">50+</div>
-                  <div className="text-sm text-gray-600">Projects Delivered</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-cc-blue">100%</div>
-                  <div className="text-sm text-gray-600">Client Satisfaction</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-cc-green">24/7</div>
-                  <div className="text-sm text-gray-600">Support Available</div>
-                </div>
-              </div>
             </div>
 
             {/* Right Column - Image */}
-            <div className="relative animate-fadeIn">
+            <div className="relative animate-fadeIn hidden md:block">
               <div className="relative h-[400px] sm:h-[500px] lg:h-[600px]">
                 <div className="absolute inset-0 bg-gradient-to-br from-cc-green/20 to-cc-blue/20 rounded-2xl blur-3xl" />
                 <Image
@@ -179,7 +163,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="pt-4">
+              <div className="pt-4 flex justify-center md:justify-start">
                 <Link href="/services">
                   <Button 
                     size="lg"
@@ -216,7 +200,7 @@ export default function Home() {
               </p>
             </div>
             
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 flex justify-center md:justify-start">
               <Link href="/contact">
                 <Button
                   size="lg"
@@ -319,7 +303,7 @@ export default function Home() {
           </div>
 
           {/* CTA at bottom of FAQ */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 flex flex-col items-center">
             <p className="text-gray-600 dark:text-gray-400 mb-4">Still have questions?</p>
             <Link href="/contact">
               <Button 

@@ -56,7 +56,7 @@ function formatDate(dateString: string): string {
  */
 export function BlogCard({ post }: BlogCardProps) {
   return (
-    <article className="group bg-white rounded-xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 hover:border-cc-green/30 hover:-translate-y-1">
+    <article className="group bg-white dark:bg-gray-900 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-500 hover:border-cc-green/30 hover:-translate-y-1 ">
       {/* Featured Image with Zoom Effect */}
       <Link href={`/blog/${post.slug}`} className="block relative w-full h-56 bg-gray-200 overflow-hidden">
         <Image
@@ -95,18 +95,18 @@ export function BlogCard({ post }: BlogCardProps) {
 
         {/* Title */}
         <Link href={`/blog/${post.slug}`}>
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-cc-green transition-colors duration-200 line-clamp-2 leading-tight">
+          <h2 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-cc-green transition-colors duration-200 line-clamp-2 leading-tight dark:text-gray-50">
             {post.title}
           </h2>
         </Link>
 
         {/* Excerpt */}
-        <p className="text-gray-600 line-clamp-3 leading-relaxed">
+        <p className="text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
           {post.excerpt}
         </p>
 
         {/* Meta Information */}
-        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 pt-4 border-t border-gray-100">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-300 pt-4 border-t border-gray-100">
           <div className="flex items-center gap-1.5">
             <User className="w-4 h-4" />
             <span className="font-medium">{post.author}</span>
