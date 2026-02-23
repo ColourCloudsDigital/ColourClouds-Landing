@@ -155,7 +155,7 @@ export default function ServicesPage() {
     <div className="min-h-screen">
       {/* Breadcrumb Navigation */}
       {/* Requirement: 10.2 - Display breadcrumb navigation showing Home > Services */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
         <div className="container mx-auto max-w-6xl">
           <Breadcrumb
             items={[
@@ -300,7 +300,7 @@ export default function ServicesPage() {
           {/* CTA */}
           <div className="text-center mt-12 flex justify-center">
             <Link href="/contact">
-              <Button size="lg" className="bg-cc-blue hover:bg-cc-blue/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group">
+              <Button size="lg" className="bg-cc-green hover:bg-cc-green/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 group">
                 Start Creating Content
                 <ArrowRight className="ml-2 h-4 w-4 arrow-animate" />
               </Button>
