@@ -450,7 +450,15 @@ export function NewsletterForm({
           >
             Terms of Service
           </a>{' '}
-          apply.
+          apply. View our{' '}
+          <a
+            href="/privacy-policy.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-foreground"
+          >
+            Privacy Policy
+          </a>.
         </p>
       </form>
     </div>

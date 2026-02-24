@@ -98,7 +98,7 @@ export default function AboutPage() {
     <div className="min-h-screen">
       {/* Breadcrumb Navigation */}
       {/* Requirement: 10.3 - Display breadcrumb navigation showing Home > About */}
-      <div className="bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
+      <div className="bg-white dark:bg-[#03050c] border-b border-gray-200 dark:border-gray-600">
         <div className="container mx-auto max-w-6xl">
           <Breadcrumb
             items={[

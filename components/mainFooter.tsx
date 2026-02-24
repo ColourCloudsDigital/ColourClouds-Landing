@@ -63,7 +63,7 @@ const MainFooter = () => {
             <div className="lg:col-span-1">
               <Link
                 href="/"
-                className="inline-block mb-6 group"
+                className="inline-block mb-6 group transition-transform hover:scale-105 duration-300"
               >
                     <CcLogo className="w-[120px] h-auto" />
               </Link>
@@ -162,12 +162,14 @@ const MainFooter = () => {
 
             {/* Additional Links */}
             <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <Link 
-                href="/privacy" 
+              <a 
+                href="/privacy-policy.pdf" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-500 hover:text-cc-green transition-colors duration-200"
               >
                 Privacy Policy
-              </Link>
+              </a>
               <Link 
                 href="/terms" 
                 className="text-gray-500 hover:text-cc-green transition-colors duration-200"

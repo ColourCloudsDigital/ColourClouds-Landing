@@ -44,7 +44,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
       {/* Breadcrumb navigation */}
       <nav
         aria-label="Breadcrumb navigation"
-        className="w-full py-3 px-4 dark:bg-gray-700"
+        className="w-full py-3 px-4 dark:bg-[#03050c]"
       >
         <ol className="flex items-center space-x-2 text-sm">
           {items.map((item, index) => {

@@ -139,7 +139,7 @@ export default async function BlogPostPage({
     <main className="min-h-screen bg-background">
       {/* Breadcrumb Navigation */}
       {/* Requirement: 10.1 - Display breadcrumb navigation showing Home > Blog > [Post Title] */}
-      <div className="bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
+      <div className="bg-white dark:bg-[#03050c] border-b border-gray-200 dark:border-gray-600">
         <div className="container mx-auto max-w-4xl">
           <Breadcrumb
             items={[
