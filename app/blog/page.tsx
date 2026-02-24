@@ -137,7 +137,7 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen">
       {/* Breadcrumb Navigation */}
-      <div className="bg-white dark:bg-[#03050c] border-b border-gray-200 dark:border-gray-600">
+      <div className="bg-white dark:bg-[#03050c] border-b border-gray-200 dark:border-transparent">
         <div className="container mx-auto max-w-7xl">
           <Breadcrumb
             items={[
