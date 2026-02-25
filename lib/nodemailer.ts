@@ -250,6 +250,8 @@ export async function sendNewsletterWelcome(data: {
   email: string;
   name?: string;
 }): Promise<boolean> {
+  const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://colourclouds.digital'}/unsubscribe?email=${encodeURIComponent(data.email)}`;
+  
   const html = `
     <!DOCTYPE html>
     <html>
@@ -265,6 +267,8 @@ export async function sendNewsletterWelcome(data: {
           .benefit-item:last-child { border-bottom: none; }
           .button { display: inline-block; background: #0072FF; color: white; padding: 12px 30px; text-decoration: none; border-radius: 4px; margin: 20px 0; }
           .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+          .unsubscribe-link { color: #999; text-decoration: none; }
+          .unsubscribe-link:hover { color: #666; text-decoration: underline; }
         </style>
       </head>
       <body>
@@ -280,7 +284,7 @@ export async function sendNewsletterWelcome(data: {
             </div>
             <div class="benefits">
               <div class="benefit-item">
-                <strong>📱 Latest Tech Insights</strong><br>
+                <strong>� Latest Tech Insights</strong><br>
                 Stay updated with the latest in app development and digital trends
               </div>
               <div class="benefit-item">
@@ -308,7 +312,7 @@ export async function sendNewsletterWelcome(data: {
               <p>Email: colourclouds042@gmail.com</p>
               <p style="font-size: 12px; margin-top: 20px;">
                 You're receiving this email because you subscribed to our newsletter.<br>
-                Don't want these emails? <a href="#">Unsubscribe</a>
+                Don't want these emails? <a href="${unsubscribeUrl}" class="unsubscribe-link">Unsubscribe</a>
               </p>
             </div>
           </div>
@@ -320,6 +324,60 @@ export async function sendNewsletterWelcome(data: {
   return sendEmail({
     to: data.email,
     subject: 'Welcome to Colour Clouds Digital Newsletter! 🎉',
+    html,
+  });
+}
+
+/**
+ * Send unsubscribe confirmation email
+ */
+export async function sendUnsubscribeConfirmation(data: {
+  email: string;
+}): Promise<boolean> {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: linear-gradient(135deg, #666 0%, #444 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+          .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
+          .message { background: white; padding: 20px; border-radius: 4px; margin: 20px 0; }
+          .button { display: inline-block; background: #01A750; color: white; padding: 12px 30px; text-decoration: none; border-radius: 4px; margin: 20px 0; }
+          .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>You've Been Unsubscribed</h1>
+          </div>
+          <div class="content">
+            <div class="message">
+              <p>Hi there,</p>
+              <p>We're sorry to see you go! You have been successfully unsubscribed from the Colour Clouds Digital newsletter.</p>
+              <p>You will no longer receive marketing emails from us.</p>
+              <p>If you change your mind, you can always resubscribe by visiting our website:</p>
+              <center>
+                <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://colourclouds.digital'}" class="button">Visit Our Website</a>
+              </center>
+              <p>If you unsubscribed by mistake or have any questions, please don't hesitate to contact us at colourclouds042@gmail.com</p>
+            </div>
+            <div class="footer">
+              <p><strong>Colour Clouds Digital</strong></p>
+              <p>Shaping Digital Experiences, One App at a Time</p>
+              <p>Email: colourclouds042@gmail.com</p>
+            </div>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: data.email,
+    subject: 'You have been unsubscribed - Colour Clouds Digital',
     html,
   });
 }

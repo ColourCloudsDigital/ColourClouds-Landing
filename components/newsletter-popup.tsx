@@ -31,6 +31,18 @@ export function NewsletterPopup() {
   const [error, setError] = React.useState("")
 
   React.useEffect(() => {
+    // Check if user is on unsubscribe page
+    const isUnsubscribing = sessionStorage.getItem('unsubscribe-in-progress')
+    if (isUnsubscribing === 'true') {
+      return
+    }
+
+    // Check if user has already subscribed
+    const hasSubscribed = localStorage.getItem("newsletter-subscribed")
+    if (hasSubscribed === "true") {
+      return
+    }
+
     // Check if user has dismissed the popup
     const dismissed = localStorage.getItem("newsletter-popup-dismissed")
     if (dismissed === "true") {
@@ -90,6 +102,9 @@ export function NewsletterPopup() {
       // Success!
       setIsSuccess(true)
       setEmail("")
+      
+      // Mark user as subscribed in localStorage
+      localStorage.setItem("newsletter-subscribed", "true")
 
       // Close popup after 2 seconds
       setTimeout(() => {

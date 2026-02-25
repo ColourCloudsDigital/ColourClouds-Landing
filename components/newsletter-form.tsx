@@ -92,6 +92,14 @@ export function NewsletterForm({
   // reCAPTCHA hook
   const { executeRecaptcha } = useGoogleReCaptcha()
 
+  // Check if user has already subscribed
+  const [hasSubscribed, setHasSubscribed] = React.useState(false)
+
+  React.useEffect(() => {
+    const subscribed = localStorage.getItem("newsletter-subscribed")
+    setHasSubscribed(subscribed === "true")
+  }, [])
+
   // Form state management
   const [formState, setFormState] = React.useState<FormState>({
     email: '',
@@ -279,6 +287,10 @@ export function NewsletterForm({
         errors: {},
       })
       
+      // Mark user as subscribed in localStorage
+      localStorage.setItem("newsletter-subscribed", "true")
+      setHasSubscribed(true)
+      
       // Show success toast
       toast.success('Successfully Subscribed!', {
         description: 'Thank you for subscribing to our newsletter.',
@@ -343,7 +355,31 @@ export function NewsletterForm({
 
   return (
     <div className={containerClasses}>
-      <form onSubmit={handleSubmit} className={formClasses} noValidate>
+      {hasSubscribed ? (
+        // Already subscribed message
+        <div className="rounded-lg bg-cc-green/10 border border-cc-green/20 p-4 text-center">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <svg
+              className="w-5 h-5 text-cc-green"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            <span className="font-semibold text-cc-green">Already Subscribed!</span>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            You're already on our newsletter list. Thank you for being a subscriber!
+          </p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className={formClasses} noValidate>
         {/* Email Field */}
         <div className={inputGroupClasses}>
           <Label htmlFor="newsletter-email" className="text-sm font-medium">
@@ -461,6 +497,7 @@ export function NewsletterForm({
           </a>.
         </p>
       </form>
+      )}
     </div>
   )
 }

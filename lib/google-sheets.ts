@@ -425,6 +425,68 @@ export class GoogleSheetsService {
   }
 
   /**
+   * Unsubscribe an email from the newsletter
+   * Marks the subscriber as "unsubscribed" in Google Sheets
+   * 
+   * @param email - Email address to unsubscribe
+   * @returns Object indicating if email was found and unsubscribed
+   */
+  async unsubscribeEmail(email: string): Promise<{ found: boolean; updated: boolean }> {
+    this.ensureInitialized();
+
+    try {
+      logger.info(`Unsubscribing email: ${email}`);
+
+      // Read all newsletter subscribers
+      const rows = await this.readSheet('Newsletter', 'A2:E1000');
+
+      // Find the row with matching email
+      let rowIndex = -1;
+      for (let i = 0; i < rows.length; i++) {
+        if (rows[i][0]?.toLowerCase() === email.toLowerCase()) {
+          rowIndex = i + 2; // +2 because we start from A2 (skip header)
+          break;
+        }
+      }
+
+      if (rowIndex === -1) {
+        logger.warn(`Email not found in newsletter list: ${email}`);
+        return { found: false, updated: false };
+      }
+
+      // Update the status column (E) to "unsubscribed"
+      await this.executeWithRetry(
+        async () => {
+          await this.sheets.spreadsheets.values.update({
+            spreadsheetId: this.spreadsheetId,
+            range: `Newsletter!E${rowIndex}`,
+            valueInputOption: 'RAW',
+            requestBody: {
+              values: [['unsubscribed']],
+            },
+          });
+        },
+        `unsubscribeEmail(${email})`
+      );
+
+      logger.info(`Successfully unsubscribed email: ${email}`);
+      return { found: true, updated: true };
+    } catch (error: any) {
+      logger.error(`Failed to unsubscribe email ${email}`, error);
+
+      if (error instanceof RateLimitError || error instanceof GoogleSheetsError) {
+        throw error;
+      }
+
+      throw new GoogleSheetsError(
+        `Failed to unsubscribe email: ${error.message}`,
+        'UNSUBSCRIBE_ERROR',
+        500
+      );
+    }
+  }
+
+  /**
    * Add a contact form submission to Google Sheets
    * Requirements: 5.2, 5.5
    * 
