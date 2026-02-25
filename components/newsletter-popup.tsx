@@ -67,7 +67,7 @@ export function NewsletterPopup() {
 
     try {
       // Execute reCAPTCHA challenge
-      const recaptchaToken = await executeRecaptcha('newsletter_popup')
+      const recaptchaToken = await executeRecaptcha('newsletter_submit')
 
       const response = await fetch("/api/newsletter", {
         method: "POST",
