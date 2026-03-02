@@ -162,14 +162,12 @@ const MainFooter = () => {
 
             {/* Additional Links */}
             <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <a 
-                href="/privacy-policy.pdf" 
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link 
+                href="/quality-policy"
                 className="text-gray-500 hover:text-cc-green transition-colors duration-200"
               >
-                Privacy Policy
-              </a>
+                Quality Policy
+              </Link>
               <Link 
                 href="/terms" 
                 className="text-gray-500 hover:text-cc-green transition-colors duration-200"

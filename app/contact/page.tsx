@@ -565,13 +565,12 @@ export default function ContactPage() {
                   </a>{' '}
                   apply. View our{' '}
                   <a
-                    href="/privacy-policy.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/quality-policy"
                     className="underline hover:text-foreground"
                   >
-                    Privacy Policy
-                  </a>.
+                    Quality Policy
+                  </a>
+                  .
                 </p>
               </form>
             </div>

@@ -487,14 +487,13 @@ export function NewsletterForm({
             Terms of Service
           </a>{' '}
           apply. View our{' '}
-          <a
-            href="/privacy-policy.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/quality-policy"
             className="underline hover:text-foreground"
           >
-            Privacy Policy
-          </a>.
+            Quality Policy
+          </Link>
+          .
         </p>
       </form>
       )}
